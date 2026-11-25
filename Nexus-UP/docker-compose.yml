@@ -1,0 +1,23 @@
+services:
+  orbitdb:
+    build:
+      context: ./apps/orbitdb-node
+      dockerfile: Dockerfile
+    container_name: orbitdb-node
+    ports:
+      - "3005:3005"
+      - "4001:4001"
+    volumes:
+      - nexus_orbitdb_data:/app/data
+    environment:
+      - PORT=3005
+    networks:
+      - nexus_default
+
+volumes:
+  nexus_orbitdb_data:
+    driver: local
+
+networks:
+  nexus_default:
+    driver: bridge
